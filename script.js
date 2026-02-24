@@ -24,7 +24,7 @@ async function main() {
 }
 
 function getGraphqlQuery() {
-    return `
+  return `
     query {
       search(
         query: "stars:>50000"
@@ -39,6 +39,12 @@ function getGraphqlQuery() {
             }
             description
             createdAt
+
+            updatedAt  
+
+            releases {  
+              totalCount
+            }
           }
         }
       }
