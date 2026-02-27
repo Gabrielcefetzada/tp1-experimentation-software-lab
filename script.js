@@ -49,7 +49,7 @@ function getGraphqlQueryWithCursor(first = 20, cursor = null) {
             releases {
               totalCount
             }
-            pullRequests {
+            pullRequests(states: MERGED) {
               totalCount
             }
           }
