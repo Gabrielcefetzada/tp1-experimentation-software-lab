@@ -46,10 +46,19 @@ function getGraphqlQueryWithCursor(first = 20, cursor = null) {
             description
             createdAt
             updatedAt  
+            primaryLanguage {
+               name
+            }
             releases {
               totalCount
             }
             pullRequests(states: MERGED) {
+              totalCount
+            }
+            totalIssues: issues {
+              totalCount
+            }
+            closedIssues: issues(states: CLOSED) {
               totalCount
             }
           }
@@ -63,9 +72,8 @@ function getGraphqlQueryWithCursor(first = 20, cursor = null) {
   `;
 }
 
-async function fetchGithubApi(query)
-{
-  return response = await fetch('https://api.github.com/graphql', {
+async function fetchGithubApi(query) {
+  return await fetch('https://api.github.com/graphql', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`,
