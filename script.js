@@ -4,7 +4,7 @@ async function query() {
   let hasNextPage = true;
   let cursor = null;
   let allRepos = [];
-  const targetCount = 30; 
+  const targetCount = 1000; 
   const pageSize = 10;
 
   console.log("Iniciando busca...");
