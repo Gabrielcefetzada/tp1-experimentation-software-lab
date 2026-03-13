@@ -1,4 +1,4 @@
-```markdown
+
 # Laboratório 01 – Características de Repositórios Populares
 
 ## Introdução
@@ -179,4 +179,3 @@ Para trabalhos futuros, recomenda-se:
 Estudos sobre software open source indicam que projetos populares tendem a possuir comunidades ativas e ciclos frequentes de atualização. Os resultados observados neste experimento corroboram essas observações, indicando que projetos amplamente utilizados apresentam grande volume de contribuição e manutenção contínua.
 
 A literatura também sugere que a linguagem de programação pode influenciar a popularidade de um projeto, com linguagens como Python e JavaScript dominando o ecossistema open source, o que foi confirmado pelos dados coletados.
-```
