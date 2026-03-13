@@ -81,7 +81,7 @@ Analisar características de repositórios populares no GitHub com base em métr
 
 ### Repositórios mais populares (stars > 2000)
 
-| Métrica | Valor (Média/Moda) |
+| Métrica | Valor (Média) |
 |---------|-------------------|
 | Releases | 120.30 |
 | Pull Requests Mergeados | 3967.40 |
@@ -94,7 +94,7 @@ Analisar características de repositórios populares no GitHub com base em métr
 
 ### Repositórios menos populares (stars 1000-2000)
 
-| Métrica | Valor (Média/Moda) |
+| Métrica | Valor (Média) |
 |---------|-------------------|
 | Releases | 26.15 |
 | Pull Requests Mergeados | 264.56 |
