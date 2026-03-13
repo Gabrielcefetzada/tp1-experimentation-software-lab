@@ -252,6 +252,20 @@ Possíveis extensões do experimento:
 
 ## Comparação com trabalhos relacionados
 
-Estudos sobre software open source indicam que projetos populares tendem a possuir comunidades ativas e ciclos frequentes de atualização. Os resultados observados neste experimento corroboram essas observações, indicando que projetos amplamente utilizados apresentam grande volume de contribuição e manutenção contínua.
+- **Raymond (2001)** afirma que projetos open source evoluem de forma mais dinâmica com colaboração aberta e feedback rápido. Isso se relaciona com os resultados deste trabalho, em que os repositórios mais populares apresentaram mais atividade e atualizações.
 
-A literatura também sugere que a linguagem de programação pode influenciar a popularidade de um projeto, com linguagens como Python e JavaScript dominando o ecossistema open source, o que foi confirmado pelos dados coletados.
+- **Tsay, Dabbish e Herbsleb (2014)** mostram que a aceitação de contribuições no GitHub envolve fatores técnicos e sociais. Isso complementa este estudo ao indicar que a atividade em repositórios populares também depende de processos de avaliação.
+
+- **Di Cosmo e Zacchiroli (2017)** destacam que o código-fonte e seu histórico são essenciais para estudos empíricos em software. Isso reforça a importância das métricas utilizadas neste relatório.
+
+De forma geral, os trabalhos analisados convergem ao indicar que a popularidade de repositórios open source está fortemente associada à atividade da comunidade, à frequência de evolução e à manutenção contínua. Assim, os resultados obtidos neste experimento se alinham à literatura ao mostrar que repositórios mais populares tendem a apresentar maior dinamismo e maior intensidade de colaboração e atualização.
+
+## Referências
+
+DI COSMO, Roberto; ZACCHIROLI, Stefano. Software Heritage: Why and How to Preserve Software Source Code. Paris: UNESCO, 2017.
+
+GITHUB. GitHub GraphQL API Documentation. Disponível em: <https://docs.github.com/en/graphql>. Acesso em: 13 mar. 2026.
+
+RAYMOND, Eric S. The Cathedral and the Bazaar. Sebastopol: O'Reilly Media, 2001.
+
+TSAY, Jason; DABBISH, Laura; HERBSLEB, James. Influence of Social and Technical Factors for Evaluating Contribution in GitHub. In: INTERNATIONAL CONFERENCE ON SOFTWARE ENGINEERING (ICSE), 36., 2014. Proceedings [...]. New York: ACM, 2014.
