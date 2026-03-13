@@ -45,8 +45,6 @@ Analisar características de repositórios populares no GitHub com base em métr
 
 # Metodologia
 
-## Passo a passo do experimento
-
 1. Utilização da API GraphQL do GitHub para consultar repositórios populares.
 2. Seleção dos **1000 repositórios com maior número de estrelas**.
 3. Coleta das seguintes informações:
@@ -56,14 +54,14 @@ Analisar características de repositórios populares no GitHub com base em métr
    * total de issues
    * issues fechadas
    * linguagem principal
+   * Idade do repositório
+   * Última atualização
 4. Armazenamento dos dados coletados em arquivo CSV.
-5. Cálculo de métricas agregadas (média) para análise inicial.
+5. Cálculo de média desses dados para análise.
 
 ## Decisões
 
-* A coleta foi limitada a **1000 repositórios** para manter o experimento viável.
-* Foi utilizada **paginação na API GraphQL** para obter todos os resultados.
-* Foram coletadas apenas métricas diretamente relacionadas às questões de pesquisa.
+* Foi utilizada **paginação na API GraphQL** para obter todos os resultados, já que não é possível retornar os valores da API de uma vez.
 
 ## Materiais utilizados
 
@@ -71,34 +69,13 @@ Analisar características de repositórios populares no GitHub com base em métr
 * API GraphQL do GitHub
 * Script em JavaScript para coleta automatizada dos dados
 * Arquivo CSV para armazenamento dos resultados
-
-## Métodos utilizados
-
-* Consulta automatizada à API GraphQL
-* Processamento de dados via script JavaScript
-* Cálculo de métricas estatísticas simples (média)
-
-## Métricas e suas Unidades
-
-| Métrica                 | Descrição                                | Unidade    |
-| ----------------------- | ---------------------------------------- | ---------- |
-| Releases                | Número total de releases por repositório | quantidade |
-| Pull Requests Mergeados | Número de pull requests aceitas          | quantidade |
-| Total de Issues         | Número total de issues criadas           | quantidade |
-| Issues Fechadas         | Número total de issues fechadas          | quantidade |
-
----
+* Montagem de gráficos em planilha para visualização dos dados
 
 # Visualização dos Resultados
 
 ## Resultados obtidos
 
-| Métrica                 | Média   |
-| ----------------------- | ------- |
-| Releases                | 120.49  |
-| Pull Requests Mergeados | 3953.96 |
-| Total de Issues         | 5003.77 |
-| Issues Fechadas         | 4357.87 |
+- COLOCA O PRINT DO GRÀFICO AQUI -
 
 Esses valores representam a média das métricas coletadas considerando os **1000 repositórios analisados**.
 
@@ -117,15 +94,6 @@ Além disso, a média elevada de issues fechadas em relação ao total de issues
 * Projetos populares tendem a ter **grande volume de contribuição da comunidade**.
 * O número elevado de releases indica **evolução contínua do software**.
 * A alta taxa de issues fechadas sugere **boa manutenção e suporte aos usuários**.
-
-## Estatísticas
-
-* Média de releases: **120.49**
-* Média de pull requests mergeados: **3953.96**
-* Média de issues totais: **5003.77**
-* Média de issues fechadas: **4357.87**
-
-A proporção de issues fechadas em relação ao total sugere uma **taxa elevada de resolução de problemas**.
 
 ---
 
@@ -149,10 +117,8 @@ Esses fatores contribuem diretamente para o crescimento e sustentabilidade de pr
 
 Para trabalhos futuros, recomenda-se:
 
-* analisar a idade dos repositórios
 * avaliar o tempo médio de resolução de issues
 * comparar resultados por linguagem de programação
-* analisar a frequência de commits ao longo do tempo
 
 ---
 

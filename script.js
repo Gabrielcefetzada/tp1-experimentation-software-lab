@@ -29,7 +29,7 @@ async function query() {
       console.log(`Progresso: ${allRepos.length}/${targetCount} coletados.`);
 
     } catch (err) {
-      console.error('Erro inesperado:', err.message);
+      console.error('Erro:', err.message);
     }
   }
 
@@ -48,6 +48,8 @@ function getGraphqlQueryWithCursor(first, cursor) {
             name
             owner { login }
             primaryLanguage { name }
+            createdAt
+            updatedAt
             releases { totalCount }
             pullRequests(states: MERGED) { totalCount }
             totalIssues: issues { totalCount }
@@ -75,11 +77,38 @@ async function fetchGithubApi(query) {
 function saveMetricsAtCSV(repos) {
   if (repos.length === 0) return;
 
-  const metrics = buildMetrics(repos);
+  const processedRepos = repos.map(repo => ({
+    ...repo,
+    ageInDays: calculateAgeInDays(repo.createdAt),
+    daysSinceLastUpdate: calculateDaysSinceLastUpdate(repo.updatedAt),
+    closedIssuesRatio: calculateCloseIssuesRatio(repo)
+  }));
+
+  const metrics = buildMetrics(processedRepos);
   const csvContent = generateCSV(metrics);
   
   fs.writeFileSync('repository_metrics.csv', csvContent);
   console.log("Arquivo 'repository_metrics.csv' gerado com sucesso");
+}
+
+function calculateAgeInDays(createdAt) {
+  const created = new Date(createdAt);
+  const now = new Date();
+  const diffTime = Math.abs(now - created);
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+}
+
+function calculateDaysSinceLastUpdate(updatedAt) {
+  const updated = new Date(updatedAt);
+  const now = new Date();
+  const diffTime = Math.abs(now - updated);
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+}
+
+function calculateCloseIssuesRatio(repo){
+  return repo.totalIssues?.totalCount > 0 
+      ? (repo.closedIssues?.totalCount / repo.totalIssues.totalCount) * 100 
+      : 0;
 }
 
 function buildMetrics(repos) {
@@ -89,24 +118,56 @@ function buildMetrics(repos) {
     "Releases": extractValues('releases'),
     "Pull Requests Mergeados": extractValues('pullRequests'),
     "Total de Issues": extractValues('totalIssues'),
-    "Issues Fechadas": extractValues('closedIssues')
+    "Issues Fechadas": extractValues('closedIssues'),
+    "Idade do Repositório (dias)": repos.map(r => r.ageInDays || 0),
+    "Dias desde última atualização": repos.map(r => r.daysSinceLastUpdate || 0),
+    "Percentual de Issues Fechadas": repos.map(r => r.closedIssuesRatio || 0),
+    "Linguagem Primária": repos.map(r => r.primaryLanguage?.name || 'Não especificada')
   };
 }
 
 function generateCSV(metrics) {
-  let csvContent = "Metrica,Média\n";
+  let csvContent = "Métrica,Valor (Média/Moda)\n";
   
   for (const [name, values] of Object.entries(metrics)) {
-    const average = calculateAverage(values).toFixed(2);
-    csvContent += `${name},${average}\n`;
+    if (name === "Linguagem Primária") {
+      const mode = calculateMode(values);
+      csvContent += `${name},${mode.valor} (${mode.quantidade} ocorrências - ${mode.percentual}%)\n`;
+    } else {
+      const average = calculateAverage(values).toFixed(2);
+      csvContent += `${name},${average}\n`;
+    }
   }
   
   return csvContent;
 }
 
 function calculateAverage(arr) {
+  if (arr.length === 0) return 0;
   return arr.reduce((a, b) => a + b, 0) / arr.length;
 }
 
+function calculateMode(arr) {
+  const count = {};
+  let maxCount = 0;
+  let mode = arr[0];
+  
+  arr.forEach(item => {
+    count[item] = (count[item] || 0) + 1;
+    if (count[item] > maxCount) {
+      maxCount = count[item];
+      mode = item;
+    }
+  });
+  
+  const percentual = ((maxCount / arr.length) * 100).toFixed(2);
+  
+  return {
+    valor: mode,
+    quantidade: maxCount,
+    percentual: percentual
+  };
+}
+
 const repos = await query();
-saveMetricsAtCSV(repos)
+saveMetricsAtCSV(repos);
