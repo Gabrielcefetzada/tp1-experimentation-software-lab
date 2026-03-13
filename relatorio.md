@@ -1,176 +1,252 @@
-
 # Laboratório 01 – Características de Repositórios Populares
 
 ## Introdução
 
 ### Contextualização
 
-Plataformas de hospedagem de código como o GitHub concentram milhares de projetos de software open source. Alguns desses projetos se destacam por possuir grande número de estrelas, indicando alta popularidade dentro da comunidade de desenvolvedores. A análise desses repositórios pode revelar padrões sobre como projetos populares são desenvolvidos, mantidos e evoluem ao longo do tempo.
+Plataformas de hospedagem de código como o GitHub concentram milhões de projetos de software open source. Alguns desses projetos se destacam por possuir grande número de estrelas, indicando maior visibilidade e popularidade dentro da comunidade de desenvolvedores.
+
+A análise desses repositórios permite compreender padrões de evolução, colaboração e manutenção em projetos de software open source. Esses padrões são importantes para entender como projetos bem-sucedidos são mantidos e como comunidades contribuem para sua evolução.
+
+---
 
 ### Problema foco do experimento
 
-Apesar da popularidade de alguns projetos open source, ainda é necessário compreender melhor como esses repositórios evoluem, especialmente em relação à frequência de releases, contribuição externa e gerenciamento de issues.
+Apesar da popularidade de muitos projetos open source, ainda é necessário compreender melhor como esses repositórios evoluem ao longo do tempo, especialmente em relação a:
+
+* frequência de releases
+* contribuição externa
+* gerenciamento de issues
+* frequência de atualização
+* tecnologias utilizadas
+
+---
 
 ### Questões de Pesquisa
 
-* **RQ01:** Sistemas populares são maduros ou antigos?
-* **RQ02:** Sistemas populares recebem muita contribuição externa?
-* **RQ03:** Sistemas populares lançam releases com frequência?
-* **RQ04:** Sistemas populares são atualizados com frequência?
-* **RQ05:** Sistemas populares são escritos nas linguagens mais populares?
-* **RQ06:** Sistemas populares possuem um alto percentual de issues fechadas?
+**RQ01:** Sistemas populares são maduros ou antigos?
+
+**RQ02:** Sistemas populares recebem muita contribuição externa?
+
+**RQ03:** Sistemas populares lançam releases com frequência?
+
+**RQ04:** Sistemas populares são atualizados com frequência?
+
+**RQ05:** Sistemas populares são escritos nas linguagens mais populares?
+
+**RQ06:** Sistemas populares possuem um alto percentual de issues fechadas?
+
+---
 
 ### Hipóteses
 
-* **H1:** Repositórios populares tendem a ser mais antigos, pois tiveram mais tempo para crescer e ganhar popularidade.
-* **H2:** Repositórios populares recebem muitas contribuições externas na forma de pull requests.
-* **H3:** Projetos populares realizam releases com frequência para manter a evolução do software.
-* **H4:** Repositórios populares são atualizados com frequência para corrigir erros e adicionar funcionalidades.
-* **H5:** A maioria dos projetos populares é escrita em linguagens amplamente utilizadas na indústria, como JavaScript, Python e Java.
-* **H6:** Projetos populares possuem uma alta taxa de issues fechadas, indicando manutenção ativa.
+**H1:** Repositórios populares tendem a ser mais antigos.
+
+**H2:** Repositórios populares recebem mais contribuições externas.
+
+**H3:** Projetos populares lançam releases com maior frequência.
+
+**H4:** Projetos populares são atualizados mais frequentemente.
+
+**H5:** Projetos populares utilizam linguagens amplamente adotadas.
+
+**H6:** Projetos populares possuem maior percentual de issues resolvidas.
+
+---
 
 ### Objetivo
 
 #### Objetivo principal
 
-Analisar características de repositórios populares no GitHub com base em métricas coletadas via API GraphQL.
+Analisar características de repositórios populares no GitHub utilizando métricas obtidas via API GraphQL.
 
 #### Objetivos específicos
 
-* Coletar dados de repositórios populares utilizando a API GraphQL do GitHub
-* Identificar padrões de contribuição e manutenção desses projetos
-* Avaliar métricas relacionadas a releases, issues e pull requests
-* Explorar tendências presentes em projetos open source populares
+* Coletar dados de repositórios populares
+* Comparar repositórios mais populares e menos populares
+* Identificar padrões de contribuição e manutenção
+* Avaliar métricas de releases, issues e pull requests
 
 ---
 
-## Metodologia
+# Metodologia
 
-1. Utilização da API GraphQL do GitHub para consultar repositórios.
-2. Seleção de dois grupos:
-   * **Repositórios mais populares:** 1000 repositórios com maior número de estrelas (stars > 2000)
-   * **Repositórios menos populares:** 1000 repositórios com estrelas entre 1000 e 2000
-3. Coleta das seguintes informações para cada grupo:
+## Procedimento experimental
 
-   * número de releases
-   * pull requests aceitas
-   * total de issues
-   * issues fechadas
-   * linguagem principal
-   * idade do repositório (dias desde a criação)
-   * dias desde a última atualização
-4. Armazenamento dos dados coletados em arquivos CSV.
-5. Cálculo da média para métricas numéricas e moda para linguagem de programação.
+1. Utilização da API GraphQL do GitHub para consulta de repositórios.
+2. Definição de dois grupos de análise:
 
-### Decisões
+### Grupo 1 – Repositórios mais populares
 
-* Foi utilizada **paginação na API GraphQL** para obter todos os resultados, já que não é possível retornar os valores da API de uma vez.
-* A query de busca foi ajustada para cada grupo: `stars:>2000` para os mais populares e `stars:1000..2000` para os menos populares.
+1000 repositórios com:
 
-### Materiais utilizados
+```
+stars > 2000
+```
+
+### Grupo 2 – Repositórios menos populares
+
+1000 repositórios com:
+
+```
+stars entre 1000 e 2000
+```
+
+---
+
+### Métricas coletadas
+
+Para cada repositório foram coletados:
+
+* número de releases
+* pull requests mergeados
+* total de issues
+* issues fechadas
+* linguagem principal
+* idade do repositório
+* dias desde a última atualização
+
+---
+
+### Ferramentas utilizadas
 
 * Node.js
-* API GraphQL do GitHub
-* Script em JavaScript para coleta automatizada dos dados
-* Arquivos CSV para armazenamento dos resultados
-* Montagem de gráficos em planilha para visualização dos dados
+* GitHub GraphQL API
+* Script JavaScript para coleta automatizada
+* Arquivos CSV para armazenamento
+* Python + Matplotlib para geração de gráficos
 
 ---
 
-## Resultados Obtidos
+# Resultados Obtidos
 
-### Repositórios mais populares (stars > 2000)
+## Repositórios mais populares
 
-| Métrica | Valor (Média) |
-|---------|-------------------|
-| Releases | 120.30 |
-| Pull Requests Mergeados | 3967.40 |
-| Total de Issues | 4990.52 |
-| Issues Fechadas | 4347.04 |
-| Idade do Repositório (dias) | 2965.70 |
-| Dias desde última atualização | 1.01 |
-| Percentual de Issues Fechadas | 77.34% |
-| Linguagem Primária | Python (204 ocorrências - 20.40%) |
-
-### Repositórios menos populares (stars 1000-2000)
-
-| Métrica | Valor (Média) |
-|---------|-------------------|
-| Releases | 26.15 |
-| Pull Requests Mergeados | 264.56 |
-| Total de Issues | 245.95 |
-| Issues Fechadas | 190.69 |
-| Idade do Repositório (dias) | 2963.72 |
-| Dias desde última atualização | 6.11 |
-| Percentual de Issues Fechadas | 66.52% |
-| Linguagem Primária | JavaScript (161 ocorrências - 16.10%) |
-
-### Comparativo visual
-
-[INSERIR GRÁFICO COMPARATIVO AQUI]
+| Métrica                       | Média   |
+| ----------------------------- | ------- |
+| Releases                      | 120.30  |
+| Pull Requests Mergeados       | 3967.40 |
+| Total de Issues               | 4990.52 |
+| Issues Fechadas               | 4347.04 |
+| Idade do Repositório (dias)   | 2965.70 |
+| Dias desde última atualização | 1.01    |
+| Percentual de Issues Fechadas | 77.34%  |
+| Linguagem mais frequente      | Python  |
 
 ---
 
-## Discussão dos Resultados
+## Repositórios menos populares
 
-### Confronto com as Questões de Pesquisa
-
-**RQ01: Sistemas populares são maduros ou antigos?**
-Ambos os grupos apresentam idade média muito próxima (cerca de 2960 dias ou aproximadamente 8 anos). Isso indica que a idade do repositório não é um fator determinante para a popularidade, contrariando a hipótese H1.
-
-**RQ02: Sistemas populares recebem muita contribuição externa?**
-Repositórios mais populares recebem significativamente mais contribuições: em média 3967 pull requests aceitas contra apenas 264 dos menos populares. A hipótese H2 é confirmada.
-
-**RQ03: Sistemas populares lançam releases com frequência?**
-A diferença é expressiva: 120 releases em média nos mais populares contra 26 nos menos populares. A hipótese H3 é confirmada.
-
-**RQ04: Sistemas populares são atualizados com frequência?**
-Repositórios mais populares são atualizados com maior frequência (média de 1 dia desde última atualização) comparado aos menos populares (média de 6 dias). A hipótese H4 é confirmada.
-
-**RQ05: Sistemas populares são escritos nas linguagens mais populares?**
-Python aparece como linguagem mais frequente nos repositórios mais populares (20.4%), enquanto JavaScript predomina nos menos populares (16.1%). Ambas são linguagens amplamente utilizadas, confirmando a hipótese H5.
-
-**RQ06: Sistemas populares possuem um alto percentual de issues fechadas?**
-Repositórios mais populares fecham cerca de 77% das issues, contra 66% dos menos populares. A diferença indica melhor manutenção nos projetos mais populares, confirmando a hipótese H6.
-
-### Insights
-
-* **Volume de contribuição:** Repositórios populares recebem cerca de 15 vezes mais pull requests que os menos populares.
-* **Releases:** Projetos populares lançam aproximadamente 4,6 vezes mais releases.
-* **Manutenção:** A taxa de issues fechadas é 11 pontos percentuais maior nos projetos populares.
-* **Atualizações:** Projetos populares são atualizados quase que diariamente (1 dia), enquanto os menos populares levam quase uma semana (6 dias) entre atualizações.
-* **Linguagens:** Python lidera entre os mais populares, enquanto JavaScript lidera entre os menos populares, sugerindo que projetos em Python podem ter maior apelo ou visibilidade.
+| Métrica                       | Média      |
+| ----------------------------- | ---------- |
+| Releases                      | 26.15      |
+| Pull Requests Mergeados       | 264.56     |
+| Total de Issues               | 245.95     |
+| Issues Fechadas               | 190.69     |
+| Idade do Repositório (dias)   | 2963.72    |
+| Dias desde última atualização | 6.11       |
+| Percentual de Issues Fechadas | 66.52%     |
+| Linguagem mais frequente      | JavaScript |
 
 ---
 
-## Conclusão
+# Visualização dos Resultados
 
-A análise comparativa entre repositórios mais populares e menos populares do GitHub demonstra diferenças significativas em diversas métricas. Projetos com maior número de estrelas apresentam:
+## Comparação entre repositórios populares e menos populares
 
-* Maior volume de contribuições externas
-* Mais releases ao longo da vida do projeto
-* Atualizações mais frequentes
-* Melhor taxa de resolução de issues
-* Linguagens de programação amplamente difundidas
+A Figura 1 apresenta uma comparação entre repositórios mais populares e menos populares considerando três métricas principais: número médio de releases, pull requests mergeados e total de issues.
 
-Os resultados indicam que a popularidade de projetos open source está associada a um ciclo virtuoso: projetos mais populares atraem mais contribuidores, que geram mais pull requests e issues, que são resolvidas mais rapidamente, resultando em mais releases e atualizações frequentes, o que por sua vez mantém e aumenta a popularidade.
+Observa-se que repositórios populares apresentam valores significativamente maiores em todas as métricas analisadas, indicando maior atividade de desenvolvimento, maior participação da comunidade e maior volume de manutenção.
 
-### Tomada de decisão
+![Comparação entre repositórios populares e menos populares](comparacao_metricas_principais.png)
 
-Para desenvolvedores que desejam criar projetos open source de sucesso, os dados sugerem que é fundamental:
-* Manter um ciclo ativo de releases
-* Responder e fechar issues com agilidade
-* Aceitar e incentivar contribuições externas
-* Manter o projeto atualizado constantemente
+**Figura 1 – Comparação entre repositórios populares e menos populares considerando releases, pull requests mergeados e total de issues.**
 
-### Sugestões futuras
+A Figura 2 complementa a análise ao comparar a idade média dos repositórios, o número médio de dias desde a última atualização e o percentual médio de issues fechadas.
 
-Para trabalhos futuros, recomenda-se:
+Os resultados mostram que os dois grupos possuem idade média bastante semelhante, o que sugere que o tempo de existência do projeto não é, por si só, um fator determinante para sua popularidade. Por outro lado, os repositórios mais populares apresentam atualizações mais frequentes e um percentual maior de issues fechadas, indicando manutenção mais ativa e maior capacidade de resposta aos problemas reportados.
 
-* avaliar o tempo médio de resolução de issues
-* comparar resultados por linguagem de programação individualmente
-* analisar a correlação entre número de contribuidores e popularidade
-* investigar se projetos mantidos por empresas ou organizações têm maior popularidade
+![Comparação de idade, atualização e resolução de issues](comparacao_metricas_secundarias.png)
+
+**Figura 2 – Comparação entre repositórios populares e menos populares considerando idade média, dias desde a última atualização e percentual de issues fechadas.**
+
+# Discussão dos Resultados
+
+### RQ01 – Sistemas populares são maduros?
+
+A idade média dos dois grupos é semelhante (~8 anos). Portanto, a idade não parece ser um fator determinante para popularidade.
+
+---
+
+### RQ02 – Contribuições externas
+
+Repositórios populares possuem aproximadamente **15 vezes mais pull requests**.
+
+Hipótese confirmada.
+
+---
+
+### RQ03 – Frequência de releases
+
+Projetos populares possuem **4,6 vezes mais releases**.
+
+Hipótese confirmada.
+
+---
+
+### RQ04 – Frequência de atualização
+
+Projetos populares apresentam atualizações praticamente diárias.
+
+Hipótese confirmada.
+
+---
+
+### RQ05 – Linguagens
+
+Python e JavaScript aparecem como linguagens predominantes.
+
+Hipótese confirmada.
+
+---
+
+### RQ06 – Issues fechadas
+
+Projetos populares possuem maior taxa de resolução de issues.
+
+Hipótese confirmada.
+
+---
+
+# Insights
+
+Principais descobertas:
+
+* projetos populares recebem muito mais contribuições externas
+* possuem ciclos de releases mais ativos
+* apresentam manutenção mais eficiente
+* são atualizados com maior frequência
+
+Esses fatores sugerem que a popularidade de projetos open source está associada à **atividade da comunidade e manutenção ativa**.
+
+---
+
+# Conclusão
+
+Os resultados indicam que projetos populares no GitHub apresentam maior atividade de desenvolvimento, maior participação da comunidade e manutenção mais eficiente.
+
+A popularidade parece estar relacionada a um ciclo positivo: projetos ativos atraem contribuidores, que aumentam a atividade do projeto, o que por sua vez aumenta sua visibilidade e popularidade.
+
+---
+
+# Sugestões futuras
+
+Possíveis extensões do experimento:
+
+* analisar tempo médio de resolução de issues
+* analisar número de contribuidores
+* avaliar impacto da linguagem na popularidade
+* investigar relação entre tamanho do projeto e popularidade
 
 ---
 
