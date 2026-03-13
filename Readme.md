@@ -13,3 +13,4 @@ Execute:
 ```shell
 node --env-file=.env script.js
 ```
+# Vai ser gerado um arquivo csv com os dados dos repositórios populares (>2000 estrelas)
